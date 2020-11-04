@@ -2,7 +2,6 @@ package diningphilosophers;
 
 import java.util.Random;
 
-
 public class Philosopher
         extends Thread {
 
@@ -22,7 +21,22 @@ public class Philosopher
 
     @Override
     public void run() {
-
+        while (true) {
+            try {
+                // Répéter indéfiniment
+                think();
+                // Prendre les 2 baguettes
+                myLeftStick.take();
+                myRightStick.take();
+                // Il peut manger
+                eat();
+                // Il relacheles baguettes
+                myLeftStick.release();
+                myRightStick.release();
+            } catch (InterruptedException ex) {
+                break;
+            }
+        }
     }
 
     // Permet d'interrompre le philosophe "proprement" :
